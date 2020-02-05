@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CommentInput = props => {
   return (
@@ -7,7 +7,10 @@ const CommentInput = props => {
         type="text"
         value={props.comment}
         placeholder="Add comment... "
-        onChange={props.changeComment}
+        onChange={event => props.setCommentInput(event.target.value)}
+        onKeyDown={event => {
+          event.key === "Enter" && props.onEnterKeyDown(event);
+        }}
       />
     </form>
   );

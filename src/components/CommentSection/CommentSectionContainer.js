@@ -6,11 +6,29 @@ import "./Comment.css";
 
 const CommentSection = props => {
   // Add state for the comments
+  const [comments, setComments] = useState(props.comments);
+  const [commentInput, setCommentInput] = useState("");
+
+  const onEnterKeyDown = event => {
+    event.preventDefault();
+    const newComment = {
+      username: "Onegiantsfan25",
+      text: commentInput
+    };
+    setComments([...comments, newComment]);
+  };
+
+  console.log(comments);
 
   return (
     <div>
-      {/* map through the comments data and return the Comment component */}
-      <CommentInput />
+      {comments.map((comment, i) => (
+        <Comment key={i} comment={comment} />
+      ))}
+      <CommentInput
+        onEnterKeyDown={onEnterKeyDown}
+        setCommentInput={setCommentInput}
+      />
     </div>
   );
 };

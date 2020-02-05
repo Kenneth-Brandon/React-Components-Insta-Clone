@@ -2,16 +2,27 @@
 import React from "react";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchTerms, searchPost }) => {
+  const onEnterKeyDown = event => {
+    event.preventDefault();
+    event.key === "Enter" && searchPost();
+  };
+
   return (
     <div className="search-bar-wrapper">
       <div className="image-wrapper">
-        <i className="fab fa-instagram" />
+        <i className="fab fa-instagram fa-2x" />
+        <h3>Whosgram</h3>
       </div>
       <form className="search-form">
+        <i className="fas fa-search" />
         <input
           type="text"
           placeholder="Search"
+          onChange={event => setSearchTerms(event.target.value)}
+          onKeyDown={event => {
+            event.key === "Enter" && onEnterKeyDown(event);
+          }}
         />
       </form>
       <div className="social-wrapper">
